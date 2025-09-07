@@ -6,10 +6,12 @@ interface MovieHTTPResponse {
 }
 
 export default async function fetchMovies(topic: string): Promise<Movie[]> {
-    const myKey = import.meta.env.VITE_API_KEY;
-    const response = await axios.get<MovieHTTPResponse>(`https://api.themoviedb.org/3/movie/${topic}`, {
+    const myToken = import.meta.env.VITE_TMDB_TOKEN;
+
+    const response = await axios.get < MovieHTTPResponse >("https://api.themoviedb.org/3/search/movie", {
+        params: { query: topic },
         headers: {
-            Authorization: `Bearer ${myKey}`,
+            Authorization: `Bearer ${myToken}`,
         },
     }
     );
