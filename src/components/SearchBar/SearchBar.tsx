@@ -7,17 +7,18 @@ interface SearchBarProps {
 
 export function SearchBar({ onSubmit }: SearchBarProps) {
 
-    const handleSubmit = (formData: FormData) => {
+    function handleSubmit(formData: FormData) {
         const query = formData.get("query") as string;
-        if (query === "") {
-        return toast.error("Please enter your search query.");
+        
+        if (!query.trim()) {
+        toast.error("Please enter your search query.");
+            return;
         }
         onSubmit(query);
     };
 
     return (
         <>
-        
         <header className={styles.header}>
             <div className={styles.container}>
                 <a className={styles.link} href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer">Powered by TMDB</a>
